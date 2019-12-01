@@ -1,0 +1,55 @@
+package Tests;
+
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import BaseTest.BaseTest;
+import Pages.AmazonAppPage;
+import Pages.FlipkartAppPage;
+import Util.TestUtil;
+import junit.framework.Assert;
+
+public class FlipkartAppTest extends BaseTest{
+	
+	FlipkartAppPage flipkartAppPage;
+	AmazonAppPage amazonAppPage;
+	TestUtil testUtil;
+	
+	public FlipkartAppTest(){
+		super();		
+	}
+	
+	@BeforeMethod
+	public void setUp() throws InterruptedException {
+		
+	
+		amazonAppPage = new AmazonAppPage(driver);
+		flipkartAppPage = new FlipkartAppPage();
+		testUtil = new TestUtil();
+		testUtil.switchToWindow();
+	}
+	
+	
+	@Test(priority=1)
+	public void searchIPhoneFlipkart(){
+		flipkartAppPage.searchIPhoneFlip();
+	}
+	
+	public void selectIPhoneFlipkart(){
+		flipkartAppPage.selectIPhoneFlip();
+		testUtil.switchToWindow();
+	}
+	
+	@Test(priority=2)
+	public void iPhonePrice() {
+		String text = amazonAppPage.iPhoneAmazonPrice.getText();
+		System.out.println("Value: " + text);
+	}
+	
+	@AfterMethod
+	public void tearDown(){
+		driver.quit();
+	}
+}

@@ -1,0 +1,26 @@
+package Tests;
+
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
+
+import BaseTest.BaseTest;
+import Pages.AmazonAppPage;
+
+public class AmazonAppTest extends BaseTest{
+	
+	@Test(priority=0)
+	public void getAmazonPrice() throws Exception{
+			
+			AmazonAppPage amazon = PageFactory.initElements(driver, AmazonAppPage.class);
+			amazon.searchProd();
+			driver.navigate().to("https://www.flipkart.com/");
+			
+			amazon.flpis();
+		}
+//	@Test(priority=1)
+//	public void getflip() throws Exception{
+//		driver.navigate().to("www.flipkart.com");
+//		AmazonAppPage amazon = PageFactory.initElements(driver, AmazonAppPage.class);
+//		amazon.flpis();
+//	}
+}

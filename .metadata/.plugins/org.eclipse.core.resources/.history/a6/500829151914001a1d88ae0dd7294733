@@ -1,0 +1,76 @@
+package Tests;
+
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import BaseTest.BaseTest;
+import Pages.AmazonAppPage;
+import Util.TestUtil;
+import Pages.FlipkartAppPage;
+public class AmazonAppTest extends BaseTest{
+	
+	FlipkartAppPage flipkartAppPage;
+	AmazonAppPage amazonAppPage;
+	TestUtil testUtil;
+	
+	public AmazonAppTest(){
+		super();		
+	}
+	public String text2;
+	public String text;
+	@BeforeMethod
+	public void setUp() throws InterruptedException {
+		
+		
+		amazonAppPage = new AmazonAppPage(driver);
+		flipkartAppPage = new FlipkartAppPage();
+		testUtil = new TestUtil();
+		
+	}
+	
+	@Test(priority=0)
+	public void amazonsearchIPhone(){
+		AmazonAppPage amazon = PageFactory.initElements(driver, AmazonAppPage.class);
+		amazon.searchIPhone();
+		amazon.selectIPhone();
+		testUtil.switchToWindow();
+		String text = amazonAppPage.iPhoneAmazonPrice.getText();
+		System.out.println("Value: " + text);
+		driver.navigate().to("https://www.flipkart.com/");
+	}
+		
+	@Test(priority=1)
+	public void searchIPhoneFlipkart(){
+		FlipkartAppPage Flipkart = PageFactory.initElements(driver, FlipkartAppPage.class);
+		Flipkart.searchIPhoneFlip();
+		Flipkart.selectIPhoneFlip();
+		testUtil.switchToWindow();
+		String text2 = flipkartAppPage.iPhoneFlipkartPrice.getText();
+		System.out.println("Value: " + text2);
+	}
+	
+	@Test(priority=2)
+	public void minIphonePrice() {
+		String text = amazonAppPage.iPhoneAmazonPrice.getText();
+		String text2 = flipkartAppPage.iPhoneFlipkartPrice.getText();
+		String text_removecurrencysymbol = text.substring(1,text.length());
+        String text2_removecurrencysymbol = text2.substring(1,text2.length());
+
+        System.out.println(text_removecurrencysymbol);
+        System.out.println(text2_removecurrencysymbol);
+
+        int difference = Integer.parseInt(text2_removecurrencysymbol)-Integer.parseInt(text_removecurrencysymbol);
+
+        System.out.println("Difference is:"+difference);
+		
+		
+		
+	}
+		
+//	@AfterMethod
+//	public void tearDown(){
+//		driver.quit();
+//	}
+}

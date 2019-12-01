@@ -1,0 +1,84 @@
+package Tests;
+
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import BaseTest.BaseTest;
+import Pages.AmazonAppPage;
+import Util.TestUtil;
+import junit.framework.Assert;
+import Pages.FlipkartAppPage;
+public class AmazonAppTest extends BaseTest{
+	
+	FlipkartAppPage flipkartAppPage;
+	AmazonAppPage amazonAppPage;
+	HomeTest homeTest;
+	TestUtil testUtil;
+	
+	public AmazonAppTest(){
+		super();		
+	}
+	
+	@BeforeMethod
+	public void setUp() throws InterruptedException {
+		
+		initialization();
+		amazonAppPage = new AmazonAppPage(driver);
+		flipkartAppPage = new FlipkartAppPage();
+		homeTest = new HomeTest();
+		testUtil = new TestUtil();
+		testUtil.switchToWindow();
+	}
+	
+//	@Test(priority=99)
+//	public void getAmazonPrice() throws Exception{
+//			
+			public AmazonAppPage amazon = PageFactory.initElements(driver, AmazonAppPage.class);
+//			amazon.searchProd();
+//			driver.navigate().to("https://www.flipkart.com/");
+//			
+//			amazon.flpis();
+//		}
+	@Test(priority=0)
+	public void amazonsearchIPhone(){
+		amazon.searchIPhone();
+	}
+	
+	@Test(priority=1)
+	public void amazonselectIPhone(){
+		amazonAppPage.selectIPhone();
+		testUtil.switchToWindow();
+	}
+	
+	@Test(priority=2)
+	public void amazonIPhonePrice() {
+		amazonAppPage.selectIPhone();
+		String text = amazonAppPage.iPhoneAmazonPrice.getText();
+		System.out.println("Value: " + text);
+		driver.navigate().to("https://www.flipkart.com/");
+	}
+	
+	@Test(priority=3)
+	public void searchIPhoneFlipkart(){
+		flipkartAppPage.searchIPhoneFlip();
+	}
+	
+	@Test(priority=4)
+	public void selectIPhoneFlipkart(){
+		flipkartAppPage.selectIPhoneFlip();
+		testUtil.switchToWindow();
+	}
+	
+	@Test(priority=5)
+	public void flipkartIPhonePrice() {
+		String text2 = flipkartAppPage.iPhoneFlipkartPrice.getText();
+		System.out.println("Value: " + text2);
+	}
+	
+	@AfterMethod
+	public void tearDown(){
+		driver.quit();
+	}
+}

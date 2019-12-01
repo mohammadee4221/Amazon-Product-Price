@@ -1,0 +1,94 @@
+package Tests;
+
+import java.util.Scanner;
+
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import BaseTest.BaseTest;
+import Pages.AmazonAppPage;
+import Util.TestUtil;
+import Pages.FlipkartAppPage;
+public class AmazonAppTest extends BaseTest{
+	
+	FlipkartAppPage flipkartAppPage;
+	AmazonAppPage amazonAppPage;
+	TestUtil testUtil;
+	
+	public AmazonAppTest(){
+		super();		
+	}
+	public String text_removecurrencysymbol;
+	public String text2_removecurrencysymbol;
+	@BeforeMethod
+	public void setUp() throws InterruptedException {
+		
+		
+		amazonAppPage = new AmazonAppPage(driver);
+		flipkartAppPage = new FlipkartAppPage();
+		testUtil = new TestUtil();
+		
+	}
+	
+	@Test(priority=0)
+	public void amazonsearchIPhone(){
+		AmazonAppPage amazon = PageFactory.initElements(driver, AmazonAppPage.class);
+		amazon.searchIPhone();
+		amazon.selectIPhone();
+		testUtil.switchToWindow();
+		String text = amazonAppPage.iPhoneAmazonPrice.getText();
+		System.out.println("Value: " + text);
+		String text_removecurrencysymbol = text.substring(1,text.length());
+		text_removecurrencysymbol = text_removecurrencysymbol.replaceAll("\\.0*$ and \"\\s","");
+		System.out.println(text_removecurrencysymbol);
+//		double aDouble  = Double.parseDouble(text_removecurrencysymbol);
+//		System.out.println("coverted string is" +aDouble);  
+//		   int i = (int)aDouble ;
+//	       System.out.println(i);
+		int Price1 = Integer.parseInt(text_removecurrencysymbol);
+		System.out.println(Price1);
+		driver.navigate().to("https://www.flipkart.com/");
+//	}
+//		
+//	@Test(priority=1)
+//	public void searchIPhoneFlipkart(){
+		FlipkartAppPage Flipkart = PageFactory.initElements(driver, FlipkartAppPage.class);
+		Flipkart.searchIPhoneFlip();
+		Flipkart.selectIPhoneFlip();
+		testUtil.switchToWindow();
+		String text2 = flipkartAppPage.iPhoneFlipkartPrice.getText();
+		System.out.println("Value: " + text2);
+		String text2_removecurrencysymbol = text2.substring(1,text2.length());
+		System.out.println(text2_removecurrencysymbol);
+		
+		
+       int Price2 = Integer.parseInt(text2_removecurrencysymbol);
+       int difference = (int) (Price2-Price1);
+      System.out.println("Difference is:"+difference);
+	       
+	       
+		
+	}
+	
+//	@Test(priority=2)
+	public void minIphonePrice(String a) {
+//		String text_removecurrencysymbol = text.substring(1,text.length());
+//        String text2_removecurrencysymbol = text2.substring(1,text2.length());
+//
+		String abc="51.00";
+        
+        double aDouble = Double.parseDouble(abc);   
+            System.out.println("coverted string is" +aDouble);  
+                 //Type cast double to int
+                             int i = (int)aDouble;
+                                   System.out.println(i);                                  
+		
+	}
+		
+//	@AfterMethod
+//	public void tearDown(){
+//		driver.quit();
+//	}
+}

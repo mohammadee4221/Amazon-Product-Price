@@ -1,0 +1,58 @@
+package Tests;
+
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import BaseTest.BaseTest;
+import Pages.AmazonAppPage;
+import Util.TestUtil;
+import Pages.FlipkartAppPage;
+public class AmazonAppTest extends BaseTest{
+	
+	FlipkartAppPage flipkartAppPage;
+	AmazonAppPage amazonAppPage;
+	HomeTest homeTest;
+	TestUtil testUtil;
+	
+	public AmazonAppTest(){
+		super();		
+	}
+	
+	@BeforeMethod
+	public void setUp() throws InterruptedException {
+		
+		
+		amazonAppPage = new AmazonAppPage(driver);
+		flipkartAppPage = new FlipkartAppPage();
+		testUtil = new TestUtil();
+		
+	}
+	
+	@Test(priority=0)
+	public void amazonsearchIPhone(){
+		AmazonAppPage amazon = PageFactory.initElements(driver, AmazonAppPage.class);
+		amazon.searchIPhone();
+		amazon.selectIPhone();
+		testUtil.switchToWindow();
+		String text = amazonAppPage.iPhoneAmazonPrice.getText();
+		System.out.println("Value: " + text);
+		driver.navigate().to("https://www.flipkart.com/");
+	}
+		
+	@Test(priority=1)
+	public void searchIPhoneFlipkart(){
+		FlipkartAppPage Flipkart = PageFactory.initElements(driver, FlipkartAppPage.class);
+		Flipkart.searchIPhoneFlip();
+		Flipkart.selectIPhoneFlip();
+		testUtil.switchToWindow();
+		String text2 = flipkartAppPage.iPhoneFlipkartPrice.getText();
+		System.out.println("Value: " + text2);
+	}
+		
+	@AfterMethod
+	public void tearDown(){
+		driver.quit();
+	}
+}

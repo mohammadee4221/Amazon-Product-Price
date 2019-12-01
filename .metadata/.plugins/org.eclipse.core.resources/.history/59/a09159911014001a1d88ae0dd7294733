@@ -1,0 +1,32 @@
+package Util;
+
+import org.testng.annotations.BeforeMethod;
+
+import BaseTest.BaseTest;
+import Pages.AmazonAppPage;
+import Pages.FlipkartAppPage;
+
+public class TestUtil extends BaseTest{
+	
+	FlipkartAppPage flipkartAppPage;
+	AmazonAppPage amazonAppPage;
+	TestUtil testUtil;
+	
+	@BeforeMethod
+	public void setUp() throws InterruptedException {
+		
+	
+		amazonAppPage = new AmazonAppPage(driver);
+		flipkartAppPage = new FlipkartAppPage();
+		testUtil = new TestUtil();
+	}
+	
+	//public static long PAGE_LOAD_TIMEOUT = 20;
+	public static long IMPLICIT_WAIT = 30;
+	
+	public void switchToWindow() {
+		for (String winHandle : driver.getWindowHandles()) {
+		    driver.switchTo().window(winHandle); 
+		}
+	}
+}
