@@ -14,17 +14,13 @@ public class BaseTest {
 	@BeforeSuite
 	 public static void initialization() throws IOException{
 	 
-		 System.setProperty("webdriver.chrome.driver", "C:\\Users\\Fameena\\Downloads\\chromedriver_win32 (5)\\chromedriver.exe");
-		 
+		 System.setProperty("webdriver.chrome.driver", "C:\\Users\\Fameena\\Downloads\\chromedriver_win32 (5)\\chromedriver.exe");		 
 		 driver = new ChromeDriver(); 
 		 driver.manage().window().maximize();
 		 driver.manage().deleteAllCookies();
-		 //driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
 		 driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
-		 driver.get("https://www.amazon.in");			
-		 
+		 driver.get("https://www.amazon.in");					 
 							
-	 }
- 
+	 } 
  
 }
