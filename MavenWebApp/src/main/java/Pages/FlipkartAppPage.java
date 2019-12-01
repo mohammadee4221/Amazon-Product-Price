@@ -31,35 +31,5 @@ public class FlipkartAppPage extends BaseTest {
 	
 	public void selectIPhoneFlip() {
 		iphoneFlipkart.click();
-	}
-	
-	
-	
-	
-//	public void flpis() {
-//		login.click();
-//		enterprod.sendKeys("Apple iPhone XR (Yellow, 64 GB)");
-//		//login.click();
-//
-//		
-//		enterprodKeys.sendKeys(Keys.ENTER);
-//		
-//		iphoneFlipkart.click();
-//		String parentHandle = driver.getWindowHandle();
-//		for (String winHandle : driver.getWindowHandles()) {
-//		    driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
-//		}
-//		String text2 = iPhoneFlipkartPrice.getText();
-//		System.out.println("Value: " + text2);
-//		
-//		 //String text_removecurrencysymbol = text.substring(1,text.length());
-//	        String text2_removecurrencysymbol = text2.substring(1,text2.length());
-//
-//	        //System.out.println(text_removecurrencysymbol);
-//	        System.out.println(text2_removecurrencysymbol);
-//
-//	        int difference = Integer.parseInt(text2_removecurrencysymbol);
-//
-//	        System.out.println("Difference is:"+difference);
-//	}
+	}		
 }
