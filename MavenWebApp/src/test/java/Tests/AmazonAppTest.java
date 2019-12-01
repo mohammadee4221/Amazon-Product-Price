@@ -18,7 +18,6 @@ public class AmazonAppTest extends BaseTest{
 	public AmazonAppTest(){
 		super();		
 	}
-
 	
 	@BeforeMethod
 	public void setUp() throws InterruptedException {				
@@ -58,7 +57,6 @@ public class AmazonAppTest extends BaseTest{
 		
 	@AfterMethod
 	public void tearDown(){
-		//driver.quit();
-		driver.close();
+		driver.quit();
 	}
 }
